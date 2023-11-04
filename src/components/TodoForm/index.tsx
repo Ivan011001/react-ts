@@ -1,10 +1,13 @@
 import { FormEvent, useState, ChangeEvent } from "react";
+import { addTodo } from "redux/Todo/slice";
+import { useDispatch } from "react-redux";
 
-interface ITodoFormProps {
-  onTodoAdd: (description: string) => void;
-}
+// interface ITodoFormProps {
+//   onTodoAdd: (description: string) => void;
+// }
 
-export default function TodoForm({ onTodoAdd }: ITodoFormProps) {
+export default function TodoForm() {
+  const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState<string>("");
 
   const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -15,7 +18,7 @@ export default function TodoForm({ onTodoAdd }: ITodoFormProps) {
 
     const description = target.todo.value;
 
-    onTodoAdd(description);
+    dispatch(addTodo(description));
 
     setNewTodo("");
   };
